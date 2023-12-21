@@ -20,7 +20,7 @@ const navigation = [
 const userNavigation = [
   { name: 'My Profile', href: '/profile' },
   { name: 'My Orders', href: '/orders' },
-  { name: 'Sign out', href: '/login' },
+  { name: 'Sign out', href: '/logout' },
 ]
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -32,7 +32,7 @@ function Navbar({children}) {
   
   useEffect(()=>{
     dispatch(fetchCardbyUserIDAsync(user.id))
-  },[ user.id ])
+  },[ user.id , dispatch])
   
 
 
@@ -209,7 +209,7 @@ function Navbar({children}) {
 
         <header className="bg-white shadow">
           <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-            <h1 className="text-3xl font-bold tracking-tight text-gray-900">Eshop</h1>
+            <h1 className="text-3xl font-bold tracking-tight text-gray-900"><Link to={"/"}>E-shop</Link></h1>
           </div>
         </header>
         <main>

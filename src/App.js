@@ -19,6 +19,7 @@ import OrderSuccess from './pages/OrderSuccess';
 import Orders from './features/Orders/Orders'
 import OrderPage from './pages/OrderPage';
 import ProfilePage from './pages/ProfilePage';
+import Logout from './features/Auth/Components/Logout';
 
 const router = createBrowserRouter([
   {
@@ -61,6 +62,10 @@ const router = createBrowserRouter([
   {
     path: "/profile",
     element: <Protected><ProfilePage/></Protected>
+  },
+  {
+    path: "/logout",
+    element: <Logout/>
   },
   {
     path: "/*",

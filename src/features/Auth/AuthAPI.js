@@ -42,3 +42,11 @@ export  function checkUser(userData) {
   }
   );
 }
+
+
+
+export  function SignOut() {
+  return new Promise(async (resolve) =>{
+    resolve({data : "Success"});}
+  );
+}
