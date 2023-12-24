@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom'
 import { StarIcon } from '@heroicons/react/20/solid'
 import { RadioGroup } from '@headlessui/react'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchAllSelectedProductAsync , selectSelectedProduct} from '../ProductSlice'
 import { useParams } from 'react-router-dom'
 import { selectUser } from '../../Auth/AuthSlice'
 import { addItemAsync } from '../../Cart/CartSlice'
+import { fetchAllSelectedProductAsync , selectSelectedProduct} from '../../Product/ProductSlice'
 
 const colors = [
   { name: 'White', class: 'bg-white', selectedClass: 'ring-gray-400' },
@@ -37,7 +37,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function Productdetail() {
+export default function AdminProductdetail() {
   const dispatch = useDispatch();
   const params = useParams();
   const id = params.id;
@@ -51,14 +51,9 @@ export default function Productdetail() {
 
   const product = useSelector(selectSelectedProduct);
 
-  const discountedPrice = Math.round(
-    product.price *
-      (1 - product.discountPercentage / 100)
-  )
-
   const handleCart = (e) => {
     e.preventDefault()
-    const cartProduct = {...product ,price : discountedPrice, user : user.id , quantity : 1}
+    const cartProduct = {...product , user : user.id , quantity : 1}
     delete cartProduct.id
     dispatch(addItemAsync(cartProduct))
   }
@@ -140,8 +135,7 @@ export default function Productdetail() {
         {/* Options */}
         <div className="mt-4 lg:row-span-3 lg:mt-0">
           <h2 className="sr-only">Product information</h2>
-          <p className="text-3xl tracking-tight text-gray-900">$ {discountedPrice}</p>
-          <p className="text-2xl tracking-tight text-gray-900 line-through">$ {product.price}</p>
+          <p className="text-3xl tracking-tight text-gray-900">$ {product.price}</p>
 
           {/* Reviews */}
           <div className="mt-6">

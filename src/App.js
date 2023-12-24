@@ -20,6 +20,12 @@ import Orders from './features/Orders/Orders'
 import OrderPage from './pages/OrderPage';
 import ProfilePage from './pages/ProfilePage';
 import Logout from './features/Auth/Components/Logout';
+import ProtectedAdmin from './features/Auth/Components/protectedAdmin';
+import AdminProductPage from './pages/AdminProductPage';
+import AdminProductDetailPage from './pages/AdminProductDetail';
+import AdminProductForm from './features/admin/components/AdminProductForm';
+import AdminProductFormPage from './pages/AdminProductFormPage';
+import ProductDetailPage from './pages/ProductDetailPage';
 
 const router = createBrowserRouter([
   {
@@ -49,7 +55,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/product-detail/:id",
-    element: <Protected><Productdetail/></Protected>,
+    element: <Protected><ProductDetailPage/></Protected>,
   },
   {
     path: "/orderSuccess/:id",
@@ -66,6 +72,30 @@ const router = createBrowserRouter([
   {
     path: "/logout",
     element: <Logout/>
+  },
+  {
+    path: "/admin/",
+    element:  <ProtectedAdmin>
+      <AdminProductPage/>
+    </ProtectedAdmin>
+  },
+  {
+    path: "/admin/product-details/:id",
+    element:  <ProtectedAdmin>
+      <AdminProductDetailPage/>
+    </ProtectedAdmin>
+  },
+  {
+    path: "/admin/product-form",
+    element:  <ProtectedAdmin>
+      <AdminProductFormPage/>
+    </ProtectedAdmin>
+  },
+  {
+    path: "/admin/product-form/edit/:id",
+    element:  <ProtectedAdmin>
+      <AdminProductFormPage/>
+    </ProtectedAdmin>
   },
   {
     path: "/*",

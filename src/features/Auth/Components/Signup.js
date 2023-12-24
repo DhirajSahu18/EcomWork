@@ -34,7 +34,7 @@ export default function Signup() {
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
           <form className="space-y-6" onSubmit={handleSubmit((userData)=>{
             console.log(userData)
-            dispatch(createUserAsync({email : userData.email , password : userData.password , Addresses : []}))
+            dispatch(createUserAsync({email : userData.email , password : userData.password , Addresses : [] , role : 'user'}))
           })} >
             <div>
               <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">

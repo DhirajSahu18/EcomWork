@@ -71,6 +71,9 @@ function Profile() {
           <div className="flex justify-between text-base font-medium text-gray-900 my-2">
             <p>Password : {user.password}</p>
           </div>
+          {user.role==='admin' && <div className="flex justify-between text-base font-medium text-gray-900 my-2">
+            <p>Role : {user.role}</p>
+          </div>}
           <div className="flex text-base font-medium text-gray-900 my-2">
             <p>Your Addresses :</p>
           </div>

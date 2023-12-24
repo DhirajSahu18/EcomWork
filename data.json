@@ -4,10 +4,11 @@
       "id": 1,
       "title": "iPhone 9",
       "description": "An apple mobile which is nothing like apple",
-      "price": 549,
+      "price": "545",
       "discountPercentage": 12.96,
-      "rating": 4.69,
+      "rating": 0,
       "stock": 94,
+      "status": "deleted",
       "brand": "Apple",
       "category": "smartphones",
       "thumbnail": "https://i.dummyjson.com/data/products/1/thumbnail.jpg",
@@ -15,15 +16,14 @@
         "https://i.dummyjson.com/data/products/1/1.jpg",
         "https://i.dummyjson.com/data/products/1/2.jpg",
         "https://i.dummyjson.com/data/products/1/3.jpg",
-        "https://i.dummyjson.com/data/products/1/4.jpg",
-        "https://i.dummyjson.com/data/products/1/thumbnail.jpg"
+        "https://i.dummyjson.com/data/products/1/4.jpg"
       ]
     },
     {
       "id": 2,
       "title": "iPhone X",
       "description": "SIM-Free, Model A19211 6.5-inch Super Retina HD display with OLED technology A12 Bionic chip with ...",
-      "price": 899,
+      "price": "898",
       "discountPercentage": 17.94,
       "rating": 4.44,
       "stock": 34,
@@ -35,7 +35,8 @@
         "https://i.dummyjson.com/data/products/2/2.jpg",
         "https://i.dummyjson.com/data/products/2/3.jpg",
         "https://i.dummyjson.com/data/products/2/thumbnail.jpg"
-      ]
+      ],
+      "status": "deleted"
     },
     {
       "id": 3,
@@ -86,7 +87,8 @@
         "https://i.dummyjson.com/data/products/5/1.jpg",
         "https://i.dummyjson.com/data/products/5/2.jpg",
         "https://i.dummyjson.com/data/products/5/3.jpg"
-      ]
+      ],
+      "status": "deleted"
     },
     {
       "id": 6,
@@ -1838,6 +1840,40 @@
         "https://i.dummyjson.com/data/products/100/3.jpg",
         "https://i.dummyjson.com/data/products/100/thumbnail.jpg"
       ]
+    },
+    {
+      "title": "Macbook 2023",
+      "price": "1989",
+      "stock": 52,
+      "description": "A macbook which will relieve all your stress",
+      "category": "laptops",
+      "brand": "Apple",
+      "discountPercentage": "3",
+      "thumbnail": "https://i.dummyjson.com/data/products/6/thumbnail.png",
+      "images": [
+        "https://i.dummyjson.com/data/products/6/thumbnail.png",
+        "https://i.dummyjson.com/data/products/6/thumbnail.png",
+        "https://i.dummyjson.com/data/products/6/thumbnail.png",
+        "https://i.dummyjson.com/data/products/6/thumbnail.png"
+      ],
+      "id": 101
+    },
+    {
+      "title": "Iphone Personal",
+      "price": "1672",
+      "description": "Bahut Badhiya Iphone",
+      "category": "smartphones",
+      "brand": "Apple",
+      "stock": 52,
+      "discountPercentage": "2.8",
+      "thumbnail": "https://i.dummyjson.com/data/products/2/thumbnail.jpg",
+      "images": [
+        "https://i.dummyjson.com/data/products/2/thumbnail.jpg",
+        "https://i.dummyjson.com/data/products/2/thumbnail.jpg",
+        "https://i.dummyjson.com/data/products/2/thumbnail.jpg",
+        "https://i.dummyjson.com/data/products/2/thumbnail.jpg"
+      ],
+      "id": 102
     }
   ],
   "categories": [
@@ -2361,18 +2397,32 @@
           "state": "Maharashtra"
         }
       ],
+      "role": "admin",
       "id": 3
     },
     {
       "email": "meraemail@gmail.com",
       "password": "Dhiraj@10",
-      "Addresses": [],
+      "Addresses": [
+        {
+          "name": "Dhiraj Sahu",
+          "MobNum": "11798",
+          "city": "Kalyan east",
+          "address": "Room no.9,Jagruk Society Santosh Nagar,punelink road",
+          "country": "India",
+          "email": "dhirajksahu01@gmail.com",
+          "postalCode": "421306",
+          "state": "Maharashtra"
+        }
+      ],
+      "role": "user",
       "id": 2
     },
     {
       "email": "jyotipanda2000@gmail.com",
       "password": "Jyoti@27",
       "Addresses": [],
+      "role": "user",
       "id": 4
     }
   ],
@@ -2416,6 +2466,26 @@
       "id": 4
     },
     {
+      "title": "MacBook Pro",
+      "description": "MacBook Pro 2021 with mini-LED display may launch between September, November",
+      "price": 1749,
+      "discountPercentage": 11.02,
+      "rating": 4.57,
+      "stock": 83,
+      "brand": "Apple",
+      "category": "laptops",
+      "thumbnail": "https://i.dummyjson.com/data/products/6/thumbnail.png",
+      "images": [
+        "https://i.dummyjson.com/data/products/6/1.png",
+        "https://i.dummyjson.com/data/products/6/2.jpg",
+        "https://i.dummyjson.com/data/products/6/3.png",
+        "https://i.dummyjson.com/data/products/6/4.jpg"
+      ],
+      "user": 3,
+      "quantity": 1,
+      "id": 5
+    },
+    {
       "title": "iPhone 9",
       "description": "An apple mobile which is nothing like apple",
       "price": 549,
@@ -2434,7 +2504,27 @@
       ],
       "user": 3,
       "quantity": 1,
-      "id": 5
+      "id": 6
+    },
+    {
+      "title": "MacBook Pro",
+      "description": "MacBook Pro 2021 with mini-LED display may launch between September, November",
+      "price": 1556,
+      "discountPercentage": 11.02,
+      "rating": 4.57,
+      "stock": 83,
+      "brand": "Apple",
+      "category": "laptops",
+      "thumbnail": "https://i.dummyjson.com/data/products/6/thumbnail.png",
+      "images": [
+        "https://i.dummyjson.com/data/products/6/1.png",
+        "https://i.dummyjson.com/data/products/6/2.jpg",
+        "https://i.dummyjson.com/data/products/6/3.png",
+        "https://i.dummyjson.com/data/products/6/4.jpg"
+      ],
+      "user": 3,
+      "quantity": 1,
+      "id": 7
     }
   ],
   "address": [

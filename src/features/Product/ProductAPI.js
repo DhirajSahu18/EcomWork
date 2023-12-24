@@ -6,6 +6,30 @@ export function fetchAllProducts() {
   );
 }
 
+export  function createProduct(productData) {
+  return new Promise(async (resolve) =>{
+    const response = await fetch("http://localhost:8080/products" , {
+      method : "POST",
+      body : JSON.stringify(productData),
+      headers : {'content-type' : 'application/json'}
+    })
+    const data = await response.json()
+    resolve({data});}
+  );
+}
+
+export  function UpdateProduct(productData) {
+  return new Promise(async (resolve) =>{
+    const response = await fetch("http://localhost:8080/products/" + productData.id , {
+      method : "PATCH",
+      body : JSON.stringify(productData),
+      headers : {'content-type' : 'application/json'}
+    })
+    const data = await response.json()
+    resolve({data});}
+  );
+}
+
 export function fetchAllSelectedProduct(id) {
   return new Promise(async (resolve) =>{
     const response = await fetch(`http://localhost:8080/products/${id}`)
