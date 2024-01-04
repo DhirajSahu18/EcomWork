@@ -3,6 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { UpdateUserAsync, selectUser } from "../../Auth/AuthSlice";
 import {} from "@heroicons/react/20/solid";
 import { useForm } from "react-hook-form";
+import {useAlert} from 'react-alert'
+import Modal from '../../common/Modal'
+
 
 function Profile() {
   const {
@@ -11,6 +14,8 @@ function Profile() {
     formState: { errors },
     setValue
   } = useForm();
+  const alert = useAlert()
+  const [openModal, setOpenModal] = useState(null);
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
   const [Add, setAdd] = useState(false);
@@ -31,6 +36,7 @@ function Profile() {
     const newUser = { ...user, Addresses: [...user.Addresses] };
     newUser.Addresses.splice(currentIndex, 1 , AddressData);
     dispatch(UpdateUserAsync(newUser));
+    alert.success("Address Updated Successfully")
     setcurrentIndex(-1)
   }
   const handleEdit = (index) => {
@@ -252,10 +258,18 @@ function Profile() {
                     >
                       Edit Address
                     </button>
-
+                    <Modal
+                            title={`Delete ${address.name}`}
+                            message="Are you sure you want to delete this Address ?"
+                            dangerOption="Delete"
+                            cancelOption="Cancel"
+                            dangerAction={(e) => handleDelete(index)}
+                            cancelAction={()=>setOpenModal(null)}
+                            showModal={openModal === index}
+                          ></Modal>
                     <button
                       className="rounded-md bg-red-700 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600  my-3"
-                      onClick={() => handleDelete(index)}
+                      onClick={() => setOpenModal(index)}
                     >
                       Delete Address
                     </button>
@@ -276,6 +290,7 @@ function Profile() {
                     Addresses: [...user.Addresses, AddressData],
                   })
                 );
+                alert.success("New Address Added!")
                 setAdd(false);
               })}
             >

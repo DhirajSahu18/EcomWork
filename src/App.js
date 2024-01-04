@@ -26,6 +26,18 @@ import AdminProductDetailPage from './pages/AdminProductDetail';
 import AdminProductForm from './features/admin/components/AdminProductForm';
 import AdminProductFormPage from './pages/AdminProductFormPage';
 import ProductDetailPage from './pages/ProductDetailPage';
+import AdminOrdersTablePage from './pages/AdminOrdersTablePage';
+import { transitions, positions, Provider as AlertProvider } from 'react-alert'
+import AlertTemplate from 'react-alert-template-basic'
+
+const options = {
+  // you can also just use 'bottom center'
+  position: positions.TOP_RIGHT,
+  timeout: 3000,
+  offset: '30px',
+  // you can also just use 'scale'
+  transition: transitions.FADE
+}
 
 const router = createBrowserRouter([
   {
@@ -98,6 +110,12 @@ const router = createBrowserRouter([
     </ProtectedAdmin>
   },
   {
+    path: "/admin/Orders",
+    element:  <ProtectedAdmin>
+      <AdminOrdersTablePage/>
+    </ProtectedAdmin>
+  },
+  {
     path: "/*",
     element: <Notfound/>,
   },
@@ -105,7 +123,9 @@ const router = createBrowserRouter([
 
 function App() {
   return (<>
+  <AlertProvider template={AlertTemplate} {...options}>
     <RouterProvider router={router} />
+  </AlertProvider>
     </>
   );
 }

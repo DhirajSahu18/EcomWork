@@ -3,10 +3,12 @@ import { Link } from 'react-router-dom'
 import { StarIcon } from '@heroicons/react/20/solid'
 import { RadioGroup } from '@headlessui/react'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchAllSelectedProductAsync , selectSelectedProduct} from '../ProductSlice'
+import { fetchAllSelectedProductAsync , selectAllProducts, selectSelectedProduct} from '../ProductSlice'
 import { useParams } from 'react-router-dom'
 import { selectUser } from '../../Auth/AuthSlice'
-import { addItemAsync } from '../../Cart/CartSlice'
+import { addItemAsync, fetchCardbyUserIDAsync, selectCartItems, selectUserItems } from '../../Cart/CartSlice'
+import { discountedPrice } from '../../../app/const'
+import {useAlert} from 'react-alert'
 
 const colors = [
   { name: 'White', class: 'bg-white', selectedClass: 'ring-gray-400' },
@@ -44,28 +46,38 @@ export default function Productdetail() {
   const user = useSelector(selectUser)
   const [selectedColor, setSelectedColor] = useState(colors[0])
   const [selectedSize, setSelectedSize] = useState(sizes[2])
+  const product = useSelector(selectSelectedProduct);
+  const AllCartProducts = useSelector(selectUserItems)
+  const alert = useAlert()
 
   useState(()=>{
     dispatch(fetchAllSelectedProductAsync(id))
   },[dispatch , id])
 
-  const product = useSelector(selectSelectedProduct);
+  // const discountedPrice = Math.round(
+  //   product.price *
+  //     (1 - product.discountPercentage / 100)
+  // )
 
-  const discountedPrice = Math.round(
-    product.price *
-      (1 - product.discountPercentage / 100)
-  )
-
-  const handleCart = (e) => {
+  const handleCart = async (e) => {
     e.preventDefault()
-    const cartProduct = {...product ,price : discountedPrice, user : user.id , quantity : 1}
+    const cartProduct = {...product ,price : discountedPrice(product), user : user.id , quantity : 1 , productId : product.id}
     delete cartProduct.id
-    dispatch(addItemAsync(cartProduct))
+    const NOF = AllCartProducts.findIndex((item)=>item.productId===product.id)
+    // console.log(NOF)
+    if (NOF<0) {
+      await dispatch(addItemAsync(cartProduct))
+      await dispatch(fetchCardbyUserIDAsync(user.id))
+      alert.success('Item Added to Cart')
+    }else{
+      alert.error("Item Already in Cart")
+    }
   }
     
   
   return (
-    <div className="bg-white">
+    <>
+    <div className="bg-white">      
       {product && (
       <div className="pt-6">
       <nav aria-label="Breadcrumb">
@@ -140,7 +152,7 @@ export default function Productdetail() {
         {/* Options */}
         <div className="mt-4 lg:row-span-3 lg:mt-0">
           <h2 className="sr-only">Product information</h2>
-          <p className="text-3xl tracking-tight text-gray-900">$ {discountedPrice}</p>
+          <p className="text-3xl tracking-tight text-gray-900">$ {discountedPrice(product)}</p>
           <p className="text-2xl tracking-tight text-gray-900 line-through">$ {product.price}</p>
 
           {/* Reviews */}
@@ -307,5 +319,6 @@ export default function Productdetail() {
     </div>
     )}
     </div>
+    </>
   )
 }

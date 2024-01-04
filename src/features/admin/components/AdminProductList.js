@@ -11,6 +11,7 @@ import {
   ChevronLeftIcon,
   ChevronRightIcon,
 } from "@heroicons/react/20/solid";
+import Modal from '../../common/Modal'
 import { Link } from "react-router-dom";
 import { ITEMS_PER_PAGE } from "../../../app/const";
 import {
@@ -44,6 +45,7 @@ export default function AdminProductList() {
   const [filter, setFilter] = useState({});
   const [sort, setsort] = useState({});
   const [page, setpage] = useState(1);
+  const [openModal, setOpenModal] = useState(null);
   const totalItems = useSelector(selecttotalItems);
 
   
@@ -373,6 +375,15 @@ export default function AdminProductList() {
                     <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
                       {products.map((product) => (
                         <div>
+                          <Modal
+                            title={`Delete ${product.title}`}
+                            message="Are you sure you want to delete this Cart item ?"
+                            dangerOption="Delete"
+                            cancelOption="Cancel"
+                            dangerAction={(e) => handleDelete(product)}
+                            cancelAction={()=>setOpenModal(null)}
+                            showModal={openModal === product.id}
+                          ></Modal>
                         <Link
                           to={`/product-detail/${product.id}`}
                           key={product.id}
@@ -423,7 +434,9 @@ export default function AdminProductList() {
                         </Link>
                         <div className="flex items-center justify-between gap-x-6">
                         <button className="rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 my-3"
-                        onClick={()=>handleDelete(product)}>
+                        onClick={()=>setOpenModal(product.id)}
+                        // onClick={()=>handleDelete(product)}
+                        >
                           Delete Product
                         </button>
                         <Link to={`product-form/edit/${product.id}`}> 

@@ -5,6 +5,7 @@ import { deleteItemAsync, deleteUserItemAsync, fetchCardbyUserIDAsync, selectCar
 import { UpdateUserAsync, selectUser } from '../Auth/AuthSlice';
 import { useForm } from "react-hook-form"
 import { createOrderAsync, selectCurrentOrder } from '../Orders/OrdersSlice';
+import { useAlert} from 'react-alert'
 
 
 function Checkout() {
@@ -13,7 +14,7 @@ function Checkout() {
     handleSubmit,
     formState: { errors },
   } = useForm()
-
+  const alert = useAlert()
   const dispatch = useDispatch()
   const user = useSelector(selectUser)
   const products = useSelector(selectUserItems)
@@ -49,7 +50,11 @@ function Checkout() {
   };
   
   const handleCheckout=()=>{
-    dispatch(createOrderAsync({products : products ,user : user.id, address : addressorder , totalAmount ,paymentMethod : payment , status : 'Processing'}))
+    if (!addressorder || !payment) {
+      alert.error("Please fill in Necessary Details")
+    }else{
+      dispatch(createOrderAsync({products : products ,user : user.id, address : addressorder , totalAmount ,paymentMethod : payment , status : 'Processing'}))
+    }
   }
 
   return (
@@ -61,6 +66,7 @@ function Checkout() {
     <form onSubmit={handleSubmit((AddressData)=>{
             console.log(AddressData)
             dispatch(UpdateUserAsync({...user , Addresses : [ ...user.Addresses ,AddressData] }))
+            alert.success("Address Added Successfully!")
           })}>
       <div className="space-y-12">
     <div className="border-b border-gray-900/10 pb-12">

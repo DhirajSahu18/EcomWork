@@ -4,12 +4,15 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Link , Navigate} from 'react-router-dom';
 import { selectUser } from '../Auth/AuthSlice';
 import { deleteItemAsync, fetchCardbyUserIDAsync, selectCartItems, selectUserItems, updateItemAsync } from './CartSlice';
+import Modal from '../common/Modal';
 
 
 
 export default function Cart() {
   
   const [open, setOpen] = useState(true)
+  const [DelId, setDelId] = useState(-1)
+  const [openModal, setOpenModal] = useState(null);
   const dispatch = useDispatch()
   const user = useSelector(selectUser)
   const products = useSelector(selectUserItems)
@@ -28,6 +31,10 @@ export default function Cart() {
     const productId =id;
     dispatch(deleteItemAsync(productId))
     dispatch(fetchCardbyUserIDAsync(user.id))
+  }
+
+  const posFunc = () =>{
+    console.log("Hello Sir")
   }
   
   const handlequantity = (e , product) => {
@@ -88,9 +95,19 @@ export default function Cart() {
                                     
 
                                     <div className="flex">
+                                    <Modal
+                            title={`Delete ${product.title}`}
+                            message="Are you sure you want to delete this Cart item ?"
+                            dangerOption="Delete"
+                            cancelOption="Cancel"
+                            dangerAction={(e) => handleRemove(product.id)}
+                            cancelAction={()=>setOpenModal(null)}
+                            showModal={openModal === product.id}
+                          ></Modal>
                                       <button
                                         type="button"
-                                        onClick={()=>handleRemove(product.id)}
+                                        onClick={()=>{setOpenModal(product.id)}}
+                                        // onClick={()=>handleRemove(product.id)}
                                         className="font-medium text-indigo-600 hover:text-indigo-500"
                                       >
                                         Remove

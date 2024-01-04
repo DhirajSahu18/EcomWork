@@ -8,6 +8,9 @@ module.exports = {
       gridTemplateRows: {
         '[auto,auto,1fr]': 'auto auto 1fr',
       },
+      backdropBlur : {
+        xs : '5px'
+      }
     },
   },
   plugins: [require('@tailwindcss/aspect-ratio'),

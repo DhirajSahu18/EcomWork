@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectUser } from "../../Auth/AuthSlice";
 import { UpdateProductAsync, clearSelectedProduct, createProductAsync, fetchAllSelectedProductAsync, selectAllBrands, selectAllCategories, selectSelectedProduct } from "../../Product/ProductSlice";
 import { Navigate, useParams } from "react-router-dom";
+import {useAlert} from 'react-alert'
 
 export default function AdminProductForm() {
   const {
@@ -13,6 +14,7 @@ export default function AdminProductForm() {
     setValue,
     reset
   } = useForm();
+  const alert = useAlert()
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
   const categories = useSelector(selectAllCategories)
@@ -64,9 +66,11 @@ export default function AdminProductForm() {
               productData.id = params.id;
               productData.rating = product.rating ;
               dispatch(UpdateProductAsync({...productData , images : images}))
+              alert.success("Update Successful")
               reset()
             }else{
               dispatch(createProductAsync({...productData , images : images}))
+              alert.success("Product Created Successfully")
               reset()
             }
           })}

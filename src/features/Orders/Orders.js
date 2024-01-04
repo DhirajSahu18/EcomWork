@@ -97,7 +97,7 @@ export default function Orders() {
                 </div>
                 <div className="flex justify-between text-base font-medium text-gray-900 my-2">
                   <p>Mobile Number  :</p>
-                  <p>{order.address.MobNUm}</p>
+                  <p>{order.address.MobNum}</p>
                 </div>
                 <div className="flex text-base font-medium text-gray-900 my-2">
                   <p>Shipped to :</p>
