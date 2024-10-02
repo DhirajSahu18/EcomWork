@@ -64,6 +64,7 @@ export default function Productdetail() {
     const cartProduct = {...product ,price : discountedPrice(product), user : user.id , quantity : 1 , productId : product.id}
     delete cartProduct.id
     const NOF = AllCartProducts.findIndex((item)=>item.productId===product.id)
+    // const NOF = -1;
     // console.log(NOF)
     if (NOF<0) {
       await dispatch(addItemAsync(cartProduct))

@@ -45,6 +45,9 @@ export default function AdminProductForm() {
       setValue('image3', product.images[2]);
       setValue('image4', product.images[3]);
       setValue('stock', product.stock);
+      if (product.status) {
+        setValue('status', product.status);
+      }
     }
   }, [product, setValue , params.id]);
   
@@ -304,6 +307,25 @@ export default function AdminProductForm() {
                       name="image3"
                       id="image3"
                       {...register("image3")}
+                      autoComplete="postal_code"
+                      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    />
+                  </div>
+                </div>
+
+                <div className="col-span-6">
+                  <label
+                    htmlFor="status"
+                    className="block text-sm font-medium leading-6 text-gray-900"
+                  >
+                    Status
+                  </label>
+                  <div className="mt-2">
+                    <input
+                      type="text"
+                      name="status"
+                      id="status"
+                      {...register("status")}
                       autoComplete="postal_code"
                       className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     />

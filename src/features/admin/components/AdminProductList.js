@@ -56,7 +56,7 @@ export default function AdminProductList() {
       options: categoryArr,
     },
     {
-      id: "Brand",
+      id: "brand",
       name: "Brands",
       options: brands,
     },
@@ -426,8 +426,13 @@ export default function AdminProductList() {
                                   ${product.price}
                                 </p>
                               </div>
-                            {product?.status && <div>
+                            </div>
+                            <div className="flex">
+                            {product?.status==='deleted' && <div>
                                 <p className="text-red-600 text-xl">{product.status}</p>
+                              </div>}
+                            {product?.stock<1 && <div>
+                                <p className="text-red-600 text-xl">Out of Stock</p>
                               </div>}
                             </div>
                           </div>

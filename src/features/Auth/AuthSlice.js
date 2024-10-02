@@ -36,9 +36,14 @@ export const SignOutAsync = createAsyncThunk(
 export const checkUserAsync = createAsyncThunk(
   'user/checkUser',
   async (userData) => {
-    const response = await checkUser(userData);
-    // The value we return becomes the `fulfilled` action payload
-    return response.data;
+    try {
+      const response = await checkUser(userData);
+      // The value we return becomes the `fulfilled` action payload
+      return response.data;
+    } catch (error) {
+      const response = await checkUser(userData);
+      return response.error
+    }
   }
 );
 

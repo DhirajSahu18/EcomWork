@@ -20,7 +20,7 @@ export  function createProduct(productData) {
 
 export  function UpdateProduct(productData) {
   return new Promise(async (resolve) =>{
-    const response = await fetch("http://localhost:8080/products/" + productData.id , {
+    const response = await fetch("http://localhost:8080/products/" , {
       method : "PATCH",
       body : JSON.stringify(productData),
       headers : {'content-type' : 'application/json'}

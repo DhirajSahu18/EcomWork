@@ -1,6 +1,6 @@
 export  function createUser(userData) {
   return new Promise(async (resolve) =>{
-    const response = await fetch("http://localhost:8080/users" , {
+    const response = await fetch("http://localhost:8080/auth" , {
       method : "POST",
       body : JSON.stringify(userData),
       headers : {'content-type' : 'application/json'}
@@ -12,7 +12,7 @@ export  function createUser(userData) {
 
 export  function UpdateUser(userData) {
   return new Promise(async (resolve) =>{
-    const response = await fetch("http://localhost:8080/users/" + userData.id , {
+    const response = await fetch("http://localhost:8080/auth" , {
       method : "PATCH",
       body : JSON.stringify(userData),
       headers : {'content-type' : 'application/json'}
@@ -26,24 +26,25 @@ export  function checkUser(userData) {
   return new Promise(async (resolve , reject ) =>{
     const email = userData.email;
     const password = userData.password;
-    const response = await fetch("http://localhost:8080/users/")
-    const data = await response.json()
-    const user = data.find(u => u.email === email);
-    if(user){
-      if(user.password === password){
-        resolve({data : user})
+    try {
+      const response = await fetch("http://localhost:8080/auth/login", {
+        method : "POST",
+        body : JSON.stringify(userData),
+        headers : {'content-type' : 'application/json'}
+      })
+      if (response.ok) {
+        const data = await response.json()
+        resolve({data})
+      }else{
+        const error = await response.json()
+        reject(error)
       }
-      else{
-        reject({message : "Invalid credentials"})
-      }
-    }else{
-      reject({message : "User not found"})
+    } catch (error) {
+      reject(error)
     }
   }
   );
 }
-
-
 
 export  function SignOut() {
   return new Promise(async (resolve) =>{

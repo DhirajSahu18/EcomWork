@@ -64,7 +64,6 @@ export default function Orders() {
                                 </div>
                               </div>
                             </div>
-                            {/* <p className="mt-1 text-sm text-gray-500">{product.color}</p> */}
                           </div>
                           <div className="flex flex-1 items-end justify-between text-sm">
                             <div className="flex">

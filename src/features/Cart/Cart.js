@@ -21,7 +21,7 @@ export default function Cart() {
     dispatch(fetchCardbyUserIDAsync(user.id))
   },[dispatch])
   
-  const totalAmount = products.reduce((amount, item) => {
+  const totalAmount = products?.reduce((amount, item) => {
     const itemTotal = item.price * item.quantity;
     return amount + itemTotal;
   }, 0);

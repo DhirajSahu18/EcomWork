@@ -1,9 +1,9 @@
 import { useForm } from "react-hook-form"
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
-import { checkUserAsync, selectUser  } from "../AuthSlice";
-
+import { checkUserAsync, selectError, selectUser  } from "../AuthSlice";
+import {useAlert} from 'react-alert'
 
 export default function Login() {
   const {
@@ -12,8 +12,17 @@ export default function Login() {
     reset,
     formState: { errors },
   } = useForm()
+  const alert = useAlert()
+  const error = useSelector(selectError)
   const dispatch = useDispatch()
   const user = useSelector(selectUser)
+
+  useEffect(()=>{
+    if (error?.message) {
+      alert.error(error.message)
+    }
+  },[error])
+  
 
   if (user) {
     return <Navigate to="/"></Navigate>

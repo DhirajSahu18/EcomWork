@@ -2426,7 +2426,30 @@
       "id": 4
     }
   ],
-  "cart": [],
+  "cart": [
+    {
+      "title": "iPhone X",
+      "description": "SIM-Free, Model A19211 6.5-inch Super Retina HD display with OLED technology A12 Bionic chip with ...",
+      "price": 737,
+      "discountPercentage": 17.94,
+      "rating": 4.44,
+      "stock": 34,
+      "brand": "Apple",
+      "category": "smartphones",
+      "thumbnail": "https://i.dummyjson.com/data/products/2/thumbnail.jpg",
+      "images": [
+        "https://i.dummyjson.com/data/products/2/1.jpg",
+        "https://i.dummyjson.com/data/products/2/2.jpg",
+        "https://i.dummyjson.com/data/products/2/3.jpg",
+        "https://i.dummyjson.com/data/products/2/thumbnail.jpg"
+      ],
+      "status": "deleted",
+      "user": 3,
+      "quantity": 1,
+      "productId": 2,
+      "id": 1
+    }
+  ],
   "address": [
     {
       "name": "Dhiraj",
@@ -2605,7 +2628,7 @@
       "user": "3",
       "totalAmount": 2998,
       "paymentMethod": "Card",
-      "status": "Delivered",
+      "status": "Cancelled",
       "id": 2
     },
     {

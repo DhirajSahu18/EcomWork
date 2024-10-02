@@ -12,7 +12,7 @@ export  function addItem(item) {
 
 export  function updateItem(item) {
   return new Promise(async (resolve) =>{
-    const response = await fetch("http://localhost:8080/cart/" + item.id , {
+    const response = await fetch("http://localhost:8080/cart/" , {
       method : "PATCH",
       body : JSON.stringify(item),
       headers : {'content-type' : 'application/json'}
@@ -50,17 +50,36 @@ export function deleteItem(productId) {
   });
 }
 
-
 export function deleteUserItem(userId) {
-  return new Promise(async (resolve) =>{
-    const response = await fetchCardbyUserID(userId);
-    const items = response.data;
-    console.log(items)
-    let i;
-    for(i=0;i<items.length;i++){
-      await deleteItem(items[i].id)
+  return new Promise(async (resolve) => {
+
+    let url;
+
+    if (userId) {
+      // Delete by product ID
+      url = `http://localhost:8080/cart/user/${userId}`;
     }
-    resolve({data : {uId : userId}});}
-  );
+
+    const response = await fetch(url, {
+      method: "DELETE",
+      headers: { 'content-type': 'application/json' }
+    });
+    
+    const data = await response.json();
+    resolve({ data : {uId: userId} });
+  });
 }
+
+// export function deleteUserItem(userId) {
+//   return new Promise(async (resolve) =>{
+//     const response = await fetchCardbyUserID(userId);
+//     const items = response.data;
+//     console.log(items)
+//     let i;
+//     for(i=0;i<items.length;i++){
+//       await deleteItem(items[i].id)
+//     }
+//     resolve({data : {uId : userId}});}
+//   );
+// }
 
